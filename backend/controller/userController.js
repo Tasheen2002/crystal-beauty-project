@@ -1,9 +1,28 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export function createUser(req, res) {
   const newUserData = req.body;
+
+  if (newUserData.type == "admin") {
+    if (req.user == null) {
+      res.json({
+        message: "Please login as an administrator to create an admin account",
+      });
+      return;
+    }
+    if (req.user.type != "admin") {
+      res.json({
+        message: "Please login as an administrator to create an admin account",
+      });
+      return;
+    }
+  }
+
   newUserData.password = bcrypt.hashSync(newUserData.password, 8);
 
   const user = new User(newUserData);
@@ -44,12 +63,12 @@ export function loginUser(req, res) {
             type: user.type,
             profilePicture: user.profilePicture,
           },
-          "tash-secret-key-2002"
+          process.env.JWT_SECRET_KEY
         );
         res.json({
-            message:"User logged in",
-            token:token 
-        })
+          message: "User logged in",
+          token: token,
+        });
       } else {
         res.json({
           message: "User not logged in Password Incorrect ",
