@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 import studentRouter from "./routes/studentRouter.js";
-import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRouter.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -27,7 +26,7 @@ app.use((req, res, next) => {
   const token = req.header("authorization")?.replace("Bearer ", "");
   console.log(token);
   if (token != null) {
-    jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET_KEY, (error, decoded) => {
       if (!error) {
         // console.log(decoded);
         req.user=decoded;
@@ -38,7 +37,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/students", studentRouter);
-app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 
 app.listen(3000, () => {
