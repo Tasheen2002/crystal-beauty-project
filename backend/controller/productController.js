@@ -46,7 +46,7 @@ export async function createProducts(req, res) {
 }
 
 export function getProducts(req,res){
-    Product.finf({}).then((products)=>{
+    Product.find({}).then((products)=>{
         res.json(products)
     })
 }
