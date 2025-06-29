@@ -38,5 +38,5 @@ const productSchema=mongoose.Schema({
     }
 })
 
-const model=mongoose.model("products",productSchema);
-export default model;
+const Product=mongoose.model("products",productSchema);
+export default Product;
