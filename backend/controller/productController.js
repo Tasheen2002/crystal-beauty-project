@@ -26,7 +26,7 @@ import { isAdmin } from "./userController.js";
 
 export async function createProducts(req, res) {
   if (!isAdmin(req)) {
-    res.json({
+    res.status(403).json({
       message: "Please login as an admin to add products",
     });
     return;
@@ -53,17 +53,17 @@ export function getProducts(req,res){
 
 export function deleteProducts(req,res){
     if(!isAdmin(req)){
-        res.json({
+        res.status(403).json({
             message:"Please login as an admin to delete products"
         })
         return;
     }
 
-    const productId=req.body.productId;
+    const productId=req.params.productId;
 
     Product.deleteOne({productId:productId}).then(()=>{
         res.json({
-            message:"Product deleted"
+            message:"Product deleted successfully"
         })
     }).catch((error)=>{
         res.status(403).json({
