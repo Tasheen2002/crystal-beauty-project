@@ -1,14 +1,44 @@
 import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function AddProductForm() {
   const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
-  const [altNames, setAltNames] = useState("");
-  const [images, setImages] = useState("");
+  const [alternativeNames, setAlternativeNames] = useState("");
+  const [imageUrls, setImageUrls] = useState("");
   const [price, setPrice] = useState("");
   const [lastPrice, setLastPrice] = useState("");
   const [stock, setStock] = useState("");
   const [description, setDescription] = useState("");
+
+  async function handleSubmit() {
+    const altNames = alternativeNames.split(",");
+    const imgUrls = imageUrls.split(",");
+
+    //according to tha backend schema
+    const product = {
+      productId: productId,
+      productName: productName,
+      altNames: altNames,
+      images: imgUrls,
+      price: price,
+      lastPrice: lastPrice,
+      stock: stock,
+      description: description,
+    };
+
+    const token = localStorage.getItem("token");
+
+    try {
+      await axios.post("http://localhost:3000/api/products", product, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.success("Product added successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="w-full min-h-screen p-8 bg-gray-100">
@@ -38,24 +68,24 @@ export default function AddProductForm() {
         </div>
 
         <div className="flex flex-col">
-          <label className="mb-1 font-medium">Alternative Names (comma separated)</label>
+          <label className="mb-1 font-medium">Alternative Names</label>
           <input
             type="text"
             placeholder="e.g. Face Gel, Skin Moisturizer"
             className="w-full border border-gray-300 rounded px-3 py-2"
-            value={altNames}
-            onChange={(e) => setAltNames(e.target.value)}
+            value={alternativeNames}
+            onChange={(e) => setAlternativeNames(e.target.value)}
           />
         </div>
 
         <div className="flex flex-col">
-          <label className="mb-1 font-medium">Image URLs (comma separated)</label>
+          <label className="mb-1 font-medium">Image URLs</label>
           <input
             type="text"
             placeholder="e.g. https://example.com/image1.jpg, https://example.com/image2.jpg"
             className="w-full border border-gray-300 rounded px-3 py-2"
-            value={images}
-            onChange={(e) => setImages(e.target.value)}
+            value={imageUrls}
+            onChange={(e) => setImageUrls(e.target.value)}
           />
         </div>
 
@@ -103,7 +133,10 @@ export default function AddProductForm() {
           />
         </div>
 
-        <button className="w-full bg-blue-600 text-white rounded px-3 py-2 font-semibold hover:bg-blue-700 transition duration-200">
+        <button
+          className="w-full bg-blue-600 text-white rounded px-3 py-2 font-semibold hover:bg-blue-700 transition duration-200"
+          onClick={handleSubmit}
+        >
           Add Product
         </button>
       </div>
