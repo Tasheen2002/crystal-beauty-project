@@ -5,12 +5,14 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { Routes, Route } from "react-router-dom";
 import AdminProductsPage from "./admin/adminProductsPage";
+import AddProductForm from "./admin/addProductForm";
 
 export default function AdminHomePage() {
+
   return (
-    <div className="bg-blue-200 w-full h-screen flex">
+    <div className="w-full min-h-screen flex">
       {/* Sidebar */}
-      <div className="w-[20%] h-screen bg-blue-500 flex flex-col items-start p-4 text-white space-y-6">
+      <div className="w-[20%] min-h-screen bg-blue-500 flex flex-col items-start p-4 text-white space-y-6">
         <Link
           className="flex items-center gap-2 hover:text-gray-200"
           to="/admin/dashboard"
@@ -41,10 +43,11 @@ export default function AdminHomePage() {
         </Link>
       </div>
 
-      <div className="w-[80%] h-screen bg-blue-300 p-6">
+      <div className="w-[80%] min-h-screen bg-blue-100">
         <Routes path="/admin">
           <Route path="/dashboard" element={<h1>Dashboard</h1>} />
           <Route path="/products" element={<h1>{<AdminProductsPage />}</h1>} />
+          <Route path="/products/addProduct" element={<AddProductForm />} />
           <Route path="/orders" element={<h1>Orders</h1>} />
           <Route path="/customers" element={<h1>Customers</h1>} />
           <Route path="/*" element={<h1>404 not found</h1>} />
