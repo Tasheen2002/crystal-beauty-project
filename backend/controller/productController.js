@@ -39,7 +39,7 @@ export async function createProducts(req, res) {
       message: "Product created",
     });
   } catch (error) {
-    res.json({
+    res.status(500).json({
       message: error,
     });
   }
