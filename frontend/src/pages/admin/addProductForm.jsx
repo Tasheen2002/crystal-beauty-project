@@ -19,6 +19,7 @@ export default function AddProductForm() {
           <label className="mb-1 font-medium">Product ID</label>
           <input
             type="text"
+            placeholder="e.g. PRD0001"
             className="w-full border border-gray-300 rounded px-3 py-2"
             value={productId}
             onChange={(e) => setProductId(e.target.value)}
@@ -29,6 +30,7 @@ export default function AddProductForm() {
           <label className="mb-1 font-medium">Product Name</label>
           <input
             type="text"
+            placeholder="e.g. Aloe Vera Gel"
             className="w-full border border-gray-300 rounded px-3 py-2"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
@@ -36,11 +38,10 @@ export default function AddProductForm() {
         </div>
 
         <div className="flex flex-col">
-          <label className="mb-1 font-medium">
-            Alternative Names (comma separated)
-          </label>
+          <label className="mb-1 font-medium">Alternative Names (comma separated)</label>
           <input
             type="text"
+            placeholder="e.g. Face Gel, Skin Moisturizer"
             className="w-full border border-gray-300 rounded px-3 py-2"
             value={altNames}
             onChange={(e) => setAltNames(e.target.value)}
@@ -48,11 +49,10 @@ export default function AddProductForm() {
         </div>
 
         <div className="flex flex-col">
-          <label className="mb-1 font-medium">
-            Image URLs (comma separated)
-          </label>
+          <label className="mb-1 font-medium">Image URLs (comma separated)</label>
           <input
             type="text"
+            placeholder="e.g. https://example.com/image1.jpg, https://example.com/image2.jpg"
             className="w-full border border-gray-300 rounded px-3 py-2"
             value={images}
             onChange={(e) => setImages(e.target.value)}
@@ -63,6 +63,7 @@ export default function AddProductForm() {
           <label className="mb-1 font-medium">Price (LKR)</label>
           <input
             type="number"
+            placeholder="e.g. 2500"
             className="w-full border border-gray-300 rounded px-3 py-2"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -73,6 +74,7 @@ export default function AddProductForm() {
           <label className="mb-1 font-medium">Last Price (LKR)</label>
           <input
             type="number"
+            placeholder="e.g. 3000"
             className="w-full border border-gray-300 rounded px-3 py-2"
             value={lastPrice}
             onChange={(e) => setLastPrice(e.target.value)}
@@ -83,6 +85,7 @@ export default function AddProductForm() {
           <label className="mb-1 font-medium">Stock</label>
           <input
             type="number"
+            placeholder="e.g. 100"
             className="w-full border border-gray-300 rounded px-3 py-2"
             value={stock}
             onChange={(e) => setStock(e.target.value)}
@@ -93,6 +96,7 @@ export default function AddProductForm() {
           <label className="mb-1 font-medium">Description</label>
           <textarea
             className="w-full border border-gray-300 rounded px-3 py-2"
+            placeholder="e.g. A refreshing gel that hydrates your skin and gives a glowing look."
             rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
